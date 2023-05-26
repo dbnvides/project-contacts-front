@@ -1,8 +1,7 @@
 import Personagem from "../../assets/Personwithoutbackgorund.png";
-import { SButton, SButtonEntry, SButtonRegister } from "../../styles/Button";
+import { SButton } from "../../styles/Button";
 import {
     SContainer,
-    SFormEntry,
     SHeader,
     SSectionDescription,
     SSectionRigth,
@@ -21,17 +20,9 @@ export const Header = () => {
                             atualizadas e acessíveis em um mundo conectado.
                         </p>
 
-                        <SButtonRegister>Cadastre-se</SButtonRegister>
-                        <p>Possui cadastro?</p>
-                        <SFormEntry>
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                placeholder="Digite seu email"
-                            />
-                            <SButtonEntry type="submit">Entrar</SButtonEntry>
-                        </SFormEntry>
+                        <SButton>Cadastre-se</SButton>
+                        <p>Ja possui cadastro?</p>
+                        <SButton>Login</SButton>
                     </SSectionDescription>
                     <SSectionRigth>
                         <div>
@@ -40,16 +31,6 @@ export const Header = () => {
                                 alt="personagem segurando uma agenda"
                             />
                         </div>
-                        <span>Já possui cadastro?</span>
-                        <SFormEntry>
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                placeholder="Digite seu email"
-                            />
-                            <button type="submit">Entrar</button>
-                        </SFormEntry>
                     </SSectionRigth>
                 </SContainer>
             </SHeader>

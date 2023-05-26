@@ -6,9 +6,13 @@ export const Home = () => {
         <>
             <NavBar />
             <Header />
-            <main>
-                <h2>Contatos</h2>
-            </main>
+
+            {/* <SArticle>
+                <SContainer>
+                    <h2>Contatos</h2>
+                    <ListContacts />
+                </SContainer>
+            </SArticle> */}
         </>
     );
 };

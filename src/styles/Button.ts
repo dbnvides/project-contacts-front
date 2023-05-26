@@ -1,8 +1,10 @@
 import { styled } from "styled-components";
 
-export const SButtonRegister = styled.button`
+export const SButton = styled.button`
     display: flex;
     padding: 5px 10px;
+    width: 130px;
+    justify-content: center;
     color: var(--color-gray-100);
     background-color: var(--color-green-600);
     border: 2px solid var(--color-green-700);
