@@ -1,13 +1,14 @@
-import { Dashboard } from "./pages/Dashboard";
-import { Home } from "./pages/Home";
+import { AuthProvider } from "./providers/AuthProvider";
+import { RoutesMain } from "./routes";
 import GlobalStyles from "./styles/GlobalStyles";
 
 export const App = () => {
     return (
         <>
             <GlobalStyles />
-            <Home />
-            <Dashboard />
+            <AuthProvider>
+                <RoutesMain />
+            </AuthProvider>
         </>
     );
 };

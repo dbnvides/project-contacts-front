@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Personagem from "../../assets/Personwithoutbackgorund.png";
 import { SButton } from "../../styles/Button";
 import {
@@ -7,6 +8,18 @@ import {
     SSectionRigth,
 } from "./styled";
 export const Header = () => {
+    const [isOpenRegisterModal, setIsOpenRegisterModal] = useState(false);
+    const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
+
+    const toggleModal = (type: string) => {
+        if (type == "login") {
+            setIsOpenLoginModal(!isOpenLoginModal);
+        }
+        if (type == "register") {
+            setIsOpenRegisterModal(!isOpenRegisterModal);
+        }
+    };
+
     return (
         <>
             <SHeader>
@@ -20,9 +33,19 @@ export const Header = () => {
                             atualizadas e acessíveis em um mundo conectado.
                         </p>
 
-                        <SButton>Cadastre-se</SButton>
+                        <SButton
+                            type="button"
+                            onClick={() => toggleModal("register")}
+                        >
+                            Cadastre-se
+                        </SButton>
                         <p>Ja possui cadastro?</p>
-                        <SButton>Login</SButton>
+                        <SButton
+                            type="button"
+                            onClick={() => toggleModal("login")}
+                        >
+                            Login
+                        </SButton>
                     </SSectionDescription>
                     <SSectionRigth>
                         <div>
