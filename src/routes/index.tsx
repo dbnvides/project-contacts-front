@@ -5,11 +5,13 @@ import { Dashboard } from "../pages/Dashboard";
 import { ProtectedHomeRoute } from "./ProtectedHomeRoute";
 
 export const RoutesMain = () => {
+    //Resolver problema de redirecionamento
     return (
         <Routes>
-            <Route element={<ProtectedHomeRoute />}>
-                <Route path="/" element={<Home />} />
-            </Route>
+            <Route path="/" element={<Home />} />
+
+            {/* <Route element={<ProtectedHomeRoute />}>
+            </Route> */}
             <Route element={<ProtectedRoutes />}>
                 <Route path="/dashboard" element={<Dashboard />} />
             </Route>

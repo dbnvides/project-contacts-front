@@ -6,7 +6,3 @@ export const schema = z.object({
 });
 
 export type LoginData = z.infer<typeof schema>;
-
-export interface IModalProps {
-    toggleModel: (type: string) => void;
-}

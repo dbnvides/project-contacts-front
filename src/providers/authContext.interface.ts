@@ -9,4 +9,5 @@ export interface IAuthContextValues {
     signIn: (data: LoginData) => void;
     loading: boolean;
     logIn: boolean;
+    clientLogout: () => void;
 }
