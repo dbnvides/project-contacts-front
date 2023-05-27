@@ -1,13 +1,25 @@
+import { useState } from "react";
 import Personagem from "../../assets/Personwithoutbackgorund.png";
-import { SButton, SButtonEntry, SButtonRegister } from "../../styles/Button";
+import { SButton } from "../../styles/Button";
 import {
     SContainer,
-    SFormEntry,
     SHeader,
     SSectionDescription,
     SSectionRigth,
 } from "./styled";
 export const Header = () => {
+    const [isOpenRegisterModal, setIsOpenRegisterModal] = useState(false);
+    const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
+
+    const toggleModal = (type: string) => {
+        if (type == "login") {
+            setIsOpenLoginModal(!isOpenLoginModal);
+        }
+        if (type == "register") {
+            setIsOpenRegisterModal(!isOpenRegisterModal);
+        }
+    };
+
     return (
         <>
             <SHeader>
@@ -21,17 +33,19 @@ export const Header = () => {
                             atualizadas e acessíveis em um mundo conectado.
                         </p>
 
-                        <SButtonRegister>Cadastre-se</SButtonRegister>
-                        <p>Possui cadastro?</p>
-                        <SFormEntry>
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                placeholder="Digite seu email"
-                            />
-                            <SButtonEntry type="submit">Entrar</SButtonEntry>
-                        </SFormEntry>
+                        <SButton
+                            type="button"
+                            onClick={() => toggleModal("register")}
+                        >
+                            Cadastre-se
+                        </SButton>
+                        <p>Ja possui cadastro?</p>
+                        <SButton
+                            type="button"
+                            onClick={() => toggleModal("login")}
+                        >
+                            Login
+                        </SButton>
                     </SSectionDescription>
                     <SSectionRigth>
                         <div>
@@ -40,16 +54,6 @@ export const Header = () => {
                                 alt="personagem segurando uma agenda"
                             />
                         </div>
-                        <span>Já possui cadastro?</span>
-                        <SFormEntry>
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                placeholder="Digite seu email"
-                            />
-                            <button type="submit">Entrar</button>
-                        </SFormEntry>
                     </SSectionRigth>
                 </SContainer>
             </SHeader>

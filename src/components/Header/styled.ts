@@ -3,8 +3,9 @@ import { styled } from "styled-components";
 export const SHeader = styled.header`
     display: flex;
     max-width: 100%;
+    min-height: calc(100vh - 70px);
     background-color: var(--color-fixed-white);
-    padding: 20px 10px;
+    padding: 130px 5px;
 `;
 
 export const SContainer = styled.div`
@@ -17,6 +18,8 @@ export const SContainer = styled.div`
     min-height: 300px;
     max-height: 400px;
     justify-content: center;
+    background-color: var(--color-green-200);
+    border-radius: 5px;
 `;
 
 export const SSectionDescription = styled.section`
@@ -29,6 +32,7 @@ export const SSectionDescription = styled.section`
     text-align: center;
     align-items: center;
     margin-top: 20px;
+
     h2 {
         font-weight: 700;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
