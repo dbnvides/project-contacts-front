@@ -1,25 +1,25 @@
-import { api } from "../../services/api";
-import { RegisterData, clientSchema } from "./validator";
+import { api } from "../../../services/api";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GrFormClose } from "react-icons/gr";
-import { SButtonClose, SButton } from "../../styles/Button";
+import { SButtonClose, SButton } from "../../../styles/Button";
 import { useState } from "react";
-import { Modal } from "../Modal";
-import { SBoxModal } from "../Modal/styled";
-import { IModalProps } from "../Modal/validator";
+import { Modal } from "../../../components/Modal";
+import { SBoxModal } from "../../../components/Modal/styled";
+import { IModalProps } from "../../../components/Modal/validator";
+import { RegisterContactData, contactSchema } from "./validator";
 
-export const ModalRegister = ({ toggleModel }: IModalProps) => {
-    const { register, handleSubmit } = useForm<RegisterData>({
-        resolver: zodResolver(clientSchema),
+export const ModalEditContact = ({ toggleModel }: IModalProps) => {
+    const { register, handleSubmit } = useForm<RegisterContactData>({
+        resolver: zodResolver(contactSchema),
     });
     const [loading, setLoading] = useState(false);
 
-    const signUp = async (data: RegisterData) => {
+    const editContact = async (data: RegisterContactData) => {
         setLoading(true);
         try {
-            await api.post<RegisterData>("/client", data);
-            toggleModel("register");
+            await api.post<RegisterContactData>(`/contact/`, data);
+            toggleModel("contact");
         } catch (error) {
             console.error(error);
         } finally {
@@ -28,18 +28,18 @@ export const ModalRegister = ({ toggleModel }: IModalProps) => {
     };
 
     return (
-        <Modal toggleModal={toggleModel} type="register">
+        <Modal toggleModal={toggleModel} type="contact">
             <SBoxModal>
                 <h2>Cadastro</h2>
-                <SButtonClose onClick={() => toggleModel("register")}>
+                <SButtonClose onClick={() => toggleModel("contact")}>
                     <GrFormClose />
                 </SButtonClose>
-                <form onSubmit={handleSubmit(signUp)}>
+                <form onSubmit={handleSubmit(editContact)}>
                     <input
                         type="text"
                         id="fullName"
                         {...register("fullName")}
-                        placeholder="Digite seu nome completo"
+                        placeholder="Digite o nome"
                     />
                     <input
                         type="number"
@@ -51,17 +51,10 @@ export const ModalRegister = ({ toggleModel }: IModalProps) => {
                         type="email"
                         id="email"
                         {...register("email")}
-                        placeholder="Digite seu email"
+                        placeholder="Digite o email"
                     />
 
-                    <input
-                        type="password"
-                        id="password"
-                        {...register("password")}
-                        placeholder="Digite sua senha"
-                    />
-
-                    <SButton type="submit">Cadastrar</SButton>
+                    <SButton type="submit">Adicionar</SButton>
                 </form>
             </SBoxModal>
         </Modal>
