@@ -30,7 +30,7 @@ export const SMain = styled.main`
     display: flex;
     flex-direction: column;
     max-width: 100%;
-    height: calc(100vh - 320px);
+    min-height: calc(100vh - 320px);
     background-color: var(--color-fixed-white);
 
     h2 {

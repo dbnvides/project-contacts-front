@@ -6,11 +6,11 @@ interface Props {
     email: string;
     tel: string;
     id: string;
-    // handleClick: (id: string) => void;
+    editContact: () => void;
 }
-export const CardContact = ({ nome, email, tel, id }: Props) => {
+export const CardContact = ({ nome, email, tel, id, editContact }: Props) => {
     return (
-        <SCardContact key={id}>
+        <SCardContact key={id} onClick={() => editContact()}>
             <div className="profile">
                 <BsPersonCircle />
             </div>

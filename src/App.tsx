@@ -3,6 +3,7 @@ import { AuthProvider } from "./providers/AuthProvider";
 import { RoutesMain } from "./routes";
 import GlobalStyles from "./styles/GlobalStyles";
 import { AxiosInterceptor } from "./components/AxiosInterceptor";
+import { ClientProvider } from "./providers/ClientProvider";
 
 export const App = () => {
     return (
@@ -10,7 +11,7 @@ export const App = () => {
             <GlobalStyles />
             <ToastContainer
                 position="top-right"
-                autoClose={5000}
+                autoClose={3000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
@@ -19,7 +20,9 @@ export const App = () => {
             />
             <AxiosInterceptor>
                 <AuthProvider>
-                    <RoutesMain />
+                    <ClientProvider>
+                        <RoutesMain />
+                    </ClientProvider>
                 </AuthProvider>
             </AxiosInterceptor>
         </>

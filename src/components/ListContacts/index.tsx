@@ -39,6 +39,7 @@ export const ListContacts = ({ children }: IPropsList) => {
                 ? children
                 : listDefault.map((contact, index) => (
                       <CardContact
+                          id={index.toString()}
                           nome={contact.nome}
                           email={contact.email}
                           tel={contact.telefone}

@@ -2,18 +2,13 @@ import { BsPersonCircle } from "react-icons/bs";
 import { SCardClient } from "./styled";
 import { SButton } from "../../styles/Button";
 import { useAuth } from "../../hooks/useAuth";
+import { Props } from "./client.interface";
 
-interface Props {
-    nome: string;
-    email: string;
-    tel: string;
-    setClientModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
-export const CardClient = ({ nome, email, tel, setClientModal }: Props) => {
+export const CardClient = ({ nome, email, tel, id, toggleModal }: Props) => {
     const { clientLogout } = useAuth();
 
     return (
-        <SCardClient>
+        <SCardClient key={id}>
             <div className="profile">
                 <BsPersonCircle />
             </div>
@@ -32,7 +27,7 @@ export const CardClient = ({ nome, email, tel, setClientModal }: Props) => {
                 </span>
             </div>
             <div className="boxButtons">
-                <SButton onClick={() => setClientModal(true)}>Editar</SButton>
+                <SButton onClick={() => toggleModal("client")}>Editar</SButton>
                 <SButton onClick={() => clientLogout()}>Logout</SButton>
             </div>
         </SCardClient>

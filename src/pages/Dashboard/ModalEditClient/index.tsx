@@ -6,22 +6,42 @@ import { SButtonClose, SButton } from "../../../styles/Button";
 import { useState } from "react";
 import { Modal } from "../../../components/Modal";
 import { SBoxModal } from "../../../components/Modal/styled";
-import { UpdateData } from "./validator";
-import { clientSchema } from "../../../components/ModalRegister/validator";
+import { UpdateData, clientSchemaUpdate } from "./validator";
 import { IModalProps } from "../../../components/Modal/validator";
+import { useClient } from "../../../hooks/useClient";
+import { toast } from "react-toastify";
 
 export const ModalEditClient = ({ toggleModel }: IModalProps) => {
-    const { register, handleSubmit } = useForm<UpdateData>({
-        resolver: zodResolver(clientSchema),
-    });
     const [loading, setLoading] = useState(false);
+    const { client } = useClient();
 
-    const editContact = async (data: UpdateData) => {
+    const { register, handleSubmit } = useForm<UpdateData>({
+        defaultValues: {
+            email: client?.email,
+            fullName: client?.fullName,
+            telephone: client?.telephone,
+        },
+        resolver: zodResolver(clientSchemaUpdate),
+    });
+
+    const editClient = async (data: UpdateData) => {
         setLoading(true);
+        if (data.email === client?.email) {
+            data = {
+                fullName: data.fullName,
+                telephone: data.telephone,
+            };
+        }
         try {
-            await api.post<UpdateData>(`/client`, data);
-            toggleModel("client");
+            const resp = await api.patch<UpdateData>(`/client`, data);
+            if (resp) {
+                toggleModel("client");
+                toast.success("Atualizado com sucesso!");
+            } else {
+                toast.error("Erro ao atualizar!");
+            }
         } catch (error) {
+            toast.error("Erro ao atualizar!");
             console.error(error);
         } finally {
             setLoading(false);
@@ -35,7 +55,7 @@ export const ModalEditClient = ({ toggleModel }: IModalProps) => {
                 <SButtonClose onClick={() => toggleModel("client")}>
                     <GrFormClose />
                 </SButtonClose>
-                <form onSubmit={handleSubmit(editContact)}>
+                <form onSubmit={handleSubmit(editClient)}>
                     <input
                         type="text"
                         id="fullName"
@@ -53,12 +73,6 @@ export const ModalEditClient = ({ toggleModel }: IModalProps) => {
                         id="email"
                         {...register("email")}
                         placeholder="Digite o email"
-                    />
-                    <input
-                        type="password"
-                        id="password"
-                        {...register("password")}
-                        placeholder="Digite sua senha"
                     />
 
                     <SButton type="submit">Salvar as alterações</SButton>

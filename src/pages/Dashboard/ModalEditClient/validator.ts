@@ -11,7 +11,11 @@ export const clientSchema = z
     })
     .partial();
 
-export type UpdateData = z.infer<typeof clientSchema>;
+export const clientSchemaUpdate = clientSchema
+    .omit({ password: true })
+    .deepPartial();
+
+export type UpdateData = z.infer<typeof clientSchemaUpdate>;
 
 export interface IModalClientProps {
     toggleModel: (type: string) => void;
