@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import { IClientContextValues, IProviderProps } from "./context.interface";
-import { LoginData } from "../components/ModalLogin/validator";
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -40,6 +39,7 @@ export const ClientProvider = ({ children }: IProviderProps) => {
                 getClient();
             }
         } catch (error) {
+            toast.error("Erro ao carregar usuário!");
             console.log(error);
         } finally {
             setLoading(false);
