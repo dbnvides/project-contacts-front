@@ -7,6 +7,13 @@ export interface IClientAllInfo {
     contacts: Array<IContact>;
 }
 
+export interface IClientUpdateInfo {
+    fullName: string;
+    email: string;
+    telephone: string;
+    password: string;
+}
+
 export interface IContact {
     id: string;
     fullName: string;

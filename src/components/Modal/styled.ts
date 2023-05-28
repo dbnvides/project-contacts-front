@@ -51,4 +51,14 @@ export const SBoxModal = styled.div`
             margin-top: 30px;
         }
     }
+
+    .buttonDelete {
+        align-self: center;
+        background-color: var(--color-red);
+        border: 2px solid red;
+
+        &:hover {
+            background-color: red;
+        }
+    }
 `;

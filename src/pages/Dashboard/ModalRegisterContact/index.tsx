@@ -8,6 +8,7 @@ import { Modal } from "../../../components/Modal";
 import { SBoxModal } from "../../../components/Modal/styled";
 import { IModalProps } from "../../../components/Modal/validator";
 import { RegisterContactData, contactSchema } from "./validator";
+import { toast } from "react-toastify";
 
 export const ModalRegisterContact = ({ toggleModel }: IModalProps) => {
     const { register, handleSubmit } = useForm<RegisterContactData>({
@@ -19,7 +20,8 @@ export const ModalRegisterContact = ({ toggleModel }: IModalProps) => {
         setLoading(true);
         try {
             await api.post<RegisterContactData>("/contact/new", data);
-            toggleModel("contact");
+            toggleModel("contactAdd");
+            toast.success("Contato adicionado");
         } catch (error) {
             console.error(error);
         } finally {
@@ -28,10 +30,10 @@ export const ModalRegisterContact = ({ toggleModel }: IModalProps) => {
     };
 
     return (
-        <Modal toggleModal={toggleModel} type="contact">
+        <Modal toggleModal={toggleModel} type="contactAdd">
             <SBoxModal>
                 <h2>Cadastro</h2>
-                <SButtonClose onClick={() => toggleModel("contact")}>
+                <SButtonClose onClick={() => toggleModel("contactAdd")}>
                     <GrFormClose />
                 </SButtonClose>
                 <form onSubmit={handleSubmit(addNewContact)}>

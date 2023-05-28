@@ -7,21 +7,54 @@ import { useState } from "react";
 import { Modal } from "../../../components/Modal";
 import { SBoxModal } from "../../../components/Modal/styled";
 import { IModalProps } from "../../../components/Modal/validator";
-import { RegisterContactData, contactSchema } from "./validator";
+import { EditContactData, contactSchemaRequest } from "./validator";
+import { useClient } from "../../../hooks/useClient";
+import { toast } from "react-toastify";
 
 export const ModalEditContact = ({ toggleModel }: IModalProps) => {
-    const { register, handleSubmit } = useForm<RegisterContactData>({
-        resolver: zodResolver(contactSchema),
-    });
+    const { contact } = useClient();
     const [loading, setLoading] = useState(false);
 
-    const editContact = async (data: RegisterContactData) => {
+    const { register, handleSubmit } = useForm<EditContactData>({
+        defaultValues: {
+            email: contact?.email,
+            fullName: contact?.fullName,
+            telephone: contact?.telephone,
+        },
+
+        resolver: zodResolver(contactSchemaRequest),
+    });
+
+    const editContact = async (data: EditContactData) => {
         setLoading(true);
+        if (data.email === contact?.email) {
+            data = {
+                fullName: data.fullName,
+                telephone: data.telephone,
+            };
+        }
+
         try {
-            await api.post<RegisterContactData>(`/contact/`, data);
+            await api.patch<EditContactData>(`/contact/${contact?.id}`, data);
             toggleModel("contact");
+            toast.success("Atualizado com sucesso!");
         } catch (error) {
             console.error(error);
+            toast.error("Erro ao atualizar!");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const deleteContact = async () => {
+        setLoading(true);
+        try {
+            await api.delete(`/contact/${contact?.id}`);
+            toggleModel("contact");
+            toast.success("Deletado com sucesso!");
+        } catch (error) {
+            console.error(error);
+            toast.error("Erro ao deletar!");
         } finally {
             setLoading(false);
         }
@@ -30,7 +63,7 @@ export const ModalEditContact = ({ toggleModel }: IModalProps) => {
     return (
         <Modal toggleModal={toggleModel} type="contact">
             <SBoxModal>
-                <h2>Cadastro</h2>
+                <h2>Editar contato</h2>
                 <SButtonClose onClick={() => toggleModel("contact")}>
                     <GrFormClose />
                 </SButtonClose>
@@ -54,8 +87,15 @@ export const ModalEditContact = ({ toggleModel }: IModalProps) => {
                         placeholder="Digite o email"
                     />
 
-                    <SButton type="submit">Adicionar</SButton>
+                    <SButton type="submit">Salvar alterações</SButton>
                 </form>
+                <SButton
+                    className="buttonDelete"
+                    type="button"
+                    onClick={() => deleteContact()}
+                >
+                    Deletar
+                </SButton>
             </SBoxModal>
         </Modal>
     );

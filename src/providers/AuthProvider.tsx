@@ -1,24 +1,21 @@
 import { createContext, useEffect, useState } from "react";
-import {
-    IAuthContextValues,
-    IAuthProviderProps,
-} from "./authContext.interface";
+import { IAuthContextValues, IProviderProps } from "./context.interface";
 import { LoginData } from "../components/ModalLogin/validator";
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ContactData } from "../pages/Dashboard/ModalEditContact/validator";
 
 export const AuthContext = createContext<IAuthContextValues>(
     {} as IAuthContextValues
 );
 
-export const AuthProvider = ({ children }: IAuthProviderProps) => {
+export const AuthProvider = ({ children }: IProviderProps) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [logIn, setLogIn] = useState(false);
 
-    //futuro logout
     const clientLogout = () => {
         localStorage.clear();
         toast.info("Usuário deslogado!");
@@ -41,7 +38,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 
         api.defaults.headers.common.authorization = `Bearer ${token}`;
         setLoading(false);
-    }, [logIn]);
+    }, []);
 
     const signIn = async (data: LoginData) => {
         setLoading(true);
@@ -58,6 +55,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
             toast.success("Login realizado com sucesso!");
         } catch (error) {
             toast.error("Email ou senha incorreta.");
+
             console.log(error);
             setLogIn(false);
         } finally {
