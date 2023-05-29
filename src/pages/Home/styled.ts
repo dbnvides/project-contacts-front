@@ -49,10 +49,11 @@ export const SSectionDescription = styled.section`
     text-align: center;
     align-items: center;
     margin-top: 20px;
+    font-family: var(--font-family-default);
 
     h2 {
         font-weight: 700;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-family: var(--font-family-default);
     }
 
     p {

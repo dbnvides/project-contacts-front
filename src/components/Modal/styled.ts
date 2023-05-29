@@ -17,7 +17,7 @@ export const SBoxModal = styled.div`
     gap: 10px;
     background-color: var(--color-fixed-white);
     width: 300px;
-    max-height: 500px;
+    max-height: 700px;
     border-radius: 4px;
     color: black;
     border: 4px solid var(--color-green-500);
@@ -26,29 +26,44 @@ export const SBoxModal = styled.div`
     position: relative;
 
     h2 {
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+            sans-serif;
+        font-weight: 700;
     }
 
     form {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 25px;
+        margin-top: 20px;
+
+        fieldset {
+            border: none;
+        }
 
         input {
             padding: 5px 10px;
             border: none;
             border-bottom: 2px solid var(--color-green-500);
             font-size: 18px;
-            margin-top: 20px;
 
             &::placeholder {
                 font-size: 18px;
+                font-family: "Gill Sans", "Gill Sans MT", Calibri,
+                    "Trebuchet MS", sans-serif;
             }
         }
 
         button {
             align-self: center;
             margin-top: 30px;
+        }
+
+        .showError {
+            color: red;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+                sans-serif;
+            margin-top: 5px;
         }
     }
 
