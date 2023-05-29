@@ -24,6 +24,9 @@ export default createGlobalStyle`
     --color-red: #ff6961;
     --color-red-800: #ff6850;
     font-size: 60%;  
+
+    --font-family-default: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+                sans-serif;
     
   }
 
@@ -45,7 +48,7 @@ export default createGlobalStyle`
   body,html{
     width: 100vw;
     height: 100vh;
-    font-family: 'Inter';
+    
  
   }
 

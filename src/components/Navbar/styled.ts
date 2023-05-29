@@ -20,8 +20,7 @@ export const SContainer = styled.div`
     span {
         color: var(--color-gray-900);
         font-size: 20px;
-        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-            "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-family: var(--font-family-default);
     }
 `;
 

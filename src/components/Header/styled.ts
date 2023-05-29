@@ -35,7 +35,6 @@ export const SSectionDescription = styled.section`
 
     h2 {
         font-weight: 700;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     }
 
     p {
