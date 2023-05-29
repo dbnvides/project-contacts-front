@@ -1,16 +1,20 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { IModalProps, LoginData, schema } from "./validator";
+import { LoginData, schema } from "./validator";
 import { useAuth } from "../../hooks/useAuth";
-
 import { SButton, SButtonClose } from "../../styles/Button";
 import { GrFormClose } from "react-icons/gr";
 import { Modal } from "../Modal";
 import { SBoxModal } from "../Modal/styled";
+import { IModalProps } from "../Modal/validator";
 
 export const ModalLogin = ({ toggleModel }: IModalProps) => {
     const { signIn } = useAuth();
-    const { register, handleSubmit } = useForm<LoginData>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<LoginData>({
         resolver: zodResolver(schema),
     });
 
@@ -22,20 +26,30 @@ export const ModalLogin = ({ toggleModel }: IModalProps) => {
                     <GrFormClose />
                 </SButtonClose>
                 <form onSubmit={handleSubmit(signIn)}>
-                    <input
-                        type="email"
-                        id="email"
-                        {...register("email")}
-                        placeholder="Digite seu email"
-                    />
-
-                    <input
-                        type="password"
-                        id="password"
-                        {...register("password")}
-                        placeholder="Digite sua senha"
-                    />
-
+                    <fieldset>
+                        <input
+                            type="email"
+                            id="email"
+                            {...register("email")}
+                            placeholder="Digite seu email"
+                        />
+                        {errors.email ? (
+                            <p className="showError">{errors.email.message}</p>
+                        ) : null}
+                    </fieldset>
+                    <fieldset>
+                        <input
+                            type="password"
+                            id="password"
+                            {...register("password")}
+                            placeholder="Digite sua senha"
+                        />
+                        {errors.password ? (
+                            <p className="showError">
+                                {errors.password.message}
+                            </p>
+                        ) : null}
+                    </fieldset>
                     <SButton type="submit">Entrar</SButton>
                 </form>
             </SBoxModal>

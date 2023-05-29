@@ -48,6 +48,20 @@ export const ModalEditClient = ({ toggleModel }: IModalProps) => {
         }
     };
 
+    const deleteClient = async () => {
+        setLoading(true);
+        try {
+            await api.delete(`/client`);
+            toggleModel("client");
+            toast.success("Conta apagada com sucesso!");
+        } catch (error) {
+            console.error(error);
+            toast.error("Erro ao deletar!");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <Modal toggleModal={toggleModel} type="client">
             <SBoxModal>
@@ -77,6 +91,13 @@ export const ModalEditClient = ({ toggleModel }: IModalProps) => {
 
                     <SButton type="submit">Salvar as alterações</SButton>
                 </form>
+                <SButton
+                    className="buttonDelete"
+                    type="button"
+                    onClick={() => deleteClient()}
+                >
+                    Deletar
+                </SButton>
             </SBoxModal>
         </Modal>
     );
